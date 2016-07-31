@@ -6,6 +6,7 @@ use Zend\Expressive\ConfigManager\PhpFileProvider;
 $configManager = new ConfigManager([
     \BlazonCms\Core\Module::class,
     \BlazonCms\Installer\Module::class,
+    \BlazonCms\OAuth2\Module::class,
     new PhpFileProvider(__DIR__.'/autoload/{{,*.}global,{,*.}local}.php'),
 ], 'data/config-cache.php');
 
