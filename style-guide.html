@@ -1,0 +1,228 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="bower-asset/bootstrap/dist/css/bootstrap.min.css">
+    <style type="text/css">
+        @font-face {
+            font-family: 'Copperplate Gothic Light';
+            src: url('copperplate-gothic-light-regular.ttf');
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Copperplate Gothic Light, sans-serif;
+            font-weight: bold;
+            padding-bottom: 0.5rem;
+        }
+
+        .headline {
+            text-decoration: underline;
+        }
+
+        a.normal, a.visited {
+            color: #ac6d45;
+            text-decoration: none;
+        }
+
+        a.hover {
+            color: #e57255;
+            text-decoration: none;
+        }
+
+        a.active {
+            color: #e53a34;
+            text-decoration: none;
+        }
+
+        a {
+            color: #ac6d45;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #e57255;
+        }
+
+        a:active {
+            color: #e53a34;
+        }
+
+        body {
+            margin: 2rem;
+            font-family: Verdana, Helvetica, sans-serif;
+        }
+
+        input {
+            padding-left: 0.3rem;
+        }
+
+        input[type=checkbox], input[type=radio] {
+            margin-top: -15px;
+        }
+
+        select {
+            padding-left: 0.1rem;
+        }
+
+        label {
+            padding-right: 0.4rem;
+        }
+
+        .example {
+            width: 70%;
+            border: 2px solid #dcdcdc;
+            margin: 2rem;
+            padding: 2rem;
+        }
+
+    </style>
+
+</head>
+<body>
+<h2 class="headline">Headings and paragraphs</h2>
+
+<div class="example">
+    <h1>Heading One</h1>
+    <p style="font-family: Verdana, Helvetica, sans-serif">
+        Lorem ipsum dolor sit amet, vel amet. <a href="#">Sem hac proin justo tempus quis</a>, condimentum vestibulum sapien, vestibulum ornare, id possimus augue orci.
+    </p>
+
+    <h2>Heading Two</h2>
+    <p style="font-family: Verdana, Helvetica, sans-serif">
+        Lorem ipsum dolor sit amet, vel amet. <a href="#">Sem hac proin justo tempus quis</a>, condimentum vestibulum sapien, vestibulum ornare, id possimus augue orci.
+    </p>
+
+    <h3>Heading Three</h3>
+    <p style="font-family: Verdana, Helvetica, sans-serif">
+        Lorem ipsum dolor sit amet, vel amet. <a href="#">Sem hac proin justo tempus quis</a>, condimentum vestibulum sapien, vestibulum ornare, id possimus augue orci.
+    </p>
+
+    <h4>Heading Four</h4>
+    <p style="font-family: Verdana, Helvetica, sans-serif">
+        Lorem ipsum dolor sit amet, vel amet. <a href="#">Sem hac proin justo tempus quis</a>, condimentum vestibulum sapien, vestibulum ornare, id possimus augue orci.
+    </p>
+
+    <h5>Heading Five</h5>
+    <p style="font-family: Verdana, Helvetica, sans-serif">
+        Lorem ipsum dolor sit amet, vel amet. <a href="#">Sem hac proin justo tempus quis</a>, condimentum vestibulum sapien, vestibulum ornare, id possimus augue orci.
+    </p>
+
+    <h6>Heading Six</h6>
+    <p style="font-family: Verdana, Helvetica, sans-serif">
+        Lorem ipsum dolor sit amet, vel amet. <a href="#">Sem hac proin justo tempus quis</a>, condimentum vestibulum sapien, vestibulum ornare, id possimus augue orci.
+    </p>
+</div>
+
+<br />
+<br />
+
+<h2 class="headline">Links</h2>
+<div class="example">
+    <p><a class="normal" href="#">Normal Link</a></p>
+    <p><a class="hover" href="#">Hover Link</a></p>
+    <p><a class="visited" href="#">Visited Link</a></p>
+    <p><a class="active" href="#">Active Link</a></p>
+</div>
+
+<h2>Lists</h2>
+<div class="example">
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4
+            <ul>
+                <li>Sub-Item 1</li>
+                <li>Sub-Item 2</li>
+                <li>Sub-Item 3</li>
+            </ul>
+        </li>
+        <li>Item 5</li>
+        <li>Item 6</li>
+    </ul>
+
+    <ol>
+        <li>Ordered 1</li>
+        <li>Ordered 2</li>
+        <li>Ordered 3</li>
+        <li>Ordered 4</li>
+    </ol>
+</div>
+
+<h2>Preformatted text</h2>
+<div class="example">
+    <pre>.example-element {
+  margin-bottom: 1rem;
+}</pre>
+</div>
+
+<h2>Table</h2>
+<div class="example">
+    <table class="table">
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+        </tr>
+        <tr>
+            <td>Row 1 Column 1</td>
+            <td>Row 1 Column 2</td>
+            <td>Row 1 Column 3</td>
+        </tr>
+        <tr>
+            <td>Row 2 Column 1</td>
+            <td>Row 2 Column 2</td>
+            <td>Row 2 Column 3</td>
+        </tr>
+        <tr>
+            <td>Row 3 Column 1</td>
+            <td>Row 3 Column 2</td>
+            <td>Row 3 Column 3</td>
+        </tr>
+    </table>
+</div>
+
+<h2>Forms</h2>
+<div class="example">
+    <form>
+        <fieldset>
+            <legend>Legend</legend>
+            <p>
+                <label for="text">Example Input</label>
+                <input id="text" type="text" name="text" value="Sample Text" />
+            </p>
+
+            <p>
+                <label for="select">Example Select</label>
+                <select id="select">
+                    <option>Select</option>
+                    <optgroup label="Group 1">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </optgroup>
+                    <optgroup label="Group 2">
+                        <option>Option 4</option>
+                        <option>Option 5</option>
+                        <option>Option 6</option>
+                    </optgroup>
+                </select>
+            </p>
+
+            <p>
+                <input id="checkbox" type="checkbox" checked="checked">
+                <label for="checkbox">Example Check Box</label>
+            </p>
+
+            <p>
+                <input id="radio1" type="radio" name="radioExample">
+                <label for="radio1">Radio 1</label>
+                <input id="radio2" type="radio" name="radioExample">
+                <label for="radio2">Radio 2</label>
+                <input id="radio3" type="radio" name="radioExample" disabled>
+                <label for="radio3">Radio 3 (Disabled)</label>
+            </p>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
