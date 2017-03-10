@@ -11,6 +11,10 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \BlazonCms\OAuth2\Module::class,
+    \BlazonCms\Installer\Module::class,
+    \BlazonCms\Core\Module::class,
+    \Zend\Cache\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
 
