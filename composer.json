@@ -30,7 +30,8 @@
         "blazoncms/core": "dev-master",
         "blazoncms/installer": "dev-master",
         "blazoncms/oauth2": "dev-master",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
         "phpmd/phpmd" : "@stable",

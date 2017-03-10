@@ -1,5 +1,3 @@
 <?php
 
-return [
-    'config_cache_enabled' => true,
-];
+return [];
