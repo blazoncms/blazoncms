@@ -53,3 +53,14 @@ wget -q https://nodejs.org/dist/v5.10.1/node-v5.10.1-linux-x64.tar.gz
 tar -C /usr/local --strip-components 1 -xzf node-v5.10.1-linux-x64.tar.gz
 rm node-v5.10.1-linux-x64.tar.gz
 
+echo "Updating .bashrc"
+echo 'PATH="/vagrant/scripts:$PATH"' >> /home/vagrant/.bashrc
+echo 'cd /vagrant;' >> /home/vagrant/.bashrc
+
+echo "Downloading Composer"
+wget -O composer-setup.php https://getcomposer.org/installer
+php composer-setup.php
+mv composer.phar /usr/local/bin/composer
+rm composer-setup.php
+
+echo "Complete"
