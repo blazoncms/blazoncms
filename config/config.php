@@ -1,13 +1,32 @@
 <?php
 
-use Zend\Expressive\ConfigManager\ConfigManager;
-use Zend\Expressive\ConfigManager\PhpFileProvider;
+use Zend\ConfigAggregator\ArrayProvider;
+use Zend\ConfigAggregator\ConfigAggregator;
+use Zend\ConfigAggregator\PhpFileProvider;
 
-$configManager = new ConfigManager([
-    \BlazonCms\Core\Module::class,
-    \BlazonCms\Installer\Module::class,
-    \BlazonCms\OAuth2\Module::class,
-    new PhpFileProvider(__DIR__.'/autoload/{{,*.}global,{,*.}local}.php'),
-], 'data/config-cache.php');
+// To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
+// `config/autoload/local.php`.
+$cacheConfig = [
+    'config_cache_path' => 'data/config-cache.php',
+];
 
-return new ArrayObject($configManager->getMergedConfig());
+$aggregator = new ConfigAggregator([
+    // Include cache configuration
+    new ArrayProvider($cacheConfig),
+
+    // Default App module config
+    App\ConfigProvider::class,
+
+    // Load application config in a pre-defined order in such a way that local settings
+    // overwrite global settings. (Loaded as first to last):
+    //   - `global.php`
+    //   - `*.global.php`
+    //   - `local.php`
+    //   - `*.local.php`
+    new PhpFileProvider('config/autoload/{{,*.}global,{,*.}local}.php'),
+
+    // Load development config if it exists
+    new PhpFileProvider('config/development.config.php'),
+], $cacheConfig['config_cache_path']);
+
+return $aggregator->getMergedConfig();

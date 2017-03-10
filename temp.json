@@ -1,0 +1,45 @@
+{
+  "name": "blazoncms/blazoncms",
+  "description": "A Modular WYSIWYG CMS",
+  "type": "project",
+  "homepage": "https://github.com/blazoncms/blazoncms",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Westin Shafer",
+      "email": "shafer_w2002@yahoo.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:blazoncms/core.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:blazoncms/installer.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:blazoncms/oauth2.git"
+    }
+  ],
+  "minimum-stability": "alpha",
+  "require": {
+    "fxp/composer-asset-plugin": "^1.2",
+    "blazoncms/core": "dev-master",
+    "blazoncms/installer": "dev-master",
+    "blazoncms/oauth2": "dev-master",
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8",
+    "squizlabs/php_codesniffer": "^2.3",
+    "phpmd/phpmd" : "@stable",
+    "filp/whoops": "^2.0"
+  },
+  "extra": {
+    "asset-installer-paths": {
+      "bower-asset-library": "public/bower-asset"
+    }
+  }
+}
