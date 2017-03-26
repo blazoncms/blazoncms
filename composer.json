@@ -55,5 +55,26 @@
         "asset-installer-paths": {
             "bower-asset-library": "public/bower-asset"
         }
+    },
+    "scripts": {
+        "orm:clear-cache:metadata" : "vendor/bin/doctrine orm:clear-cache:metadata",
+        "orm:clear-cache:query" : "vendor/bin/doctrine orm:clear-cache:query",
+        "orm:clear-cache:result" : "vendor/bin/doctrine orm:clear-cache:result",
+        "orm:convert-d1-schema" : "vendor/bin/doctrine orm:convert-d1-schema",
+        "orm:convert-mapping" : "vendor/bin/doctrine orm:convert-mapping",
+        "orm:ensure-production-settings" : "vendor/bin/doctrine orm:ensure-production-settings",
+        "orm:generate-entities" : "vendor/bin/doctrine orm:generate-entities",
+        "orm:generate-proxies" : "vendor/bin/doctrine orm:generate-proxies",
+        "orm:generate-repositories" : "vendor/bin/doctrine orm:generate-repositories",
+        "orm:info" : "vendor/bin/doctrine orm:info",
+        "orm:mapping:describe" : "vendor/bin/doctrine orm:mapping:describe",
+        "orm:run-dql" : "vendor/bin/doctrine orm:run-dql",
+        "orm:schema-tool:create" : "vendor/bin/doctrine orm:schema-tool:create",
+        "orm:schema-tool:drop" : "vendor/bin/doctrine orm:schema-tool:drop",
+        "orm:schema-tool:update" : "vendor/bin/doctrine orm:schema-tool:update",
+        "orm:validate-schema" : "vendor/bin/doctrine orm:validate-schema",
+        "dbal:import" : "vendor/bin/doctrine-dbal dbal:import",
+        "dbal:reserved-words" : "vendor/bin/doctrine-dbal dbal:reserved-words",
+        "dbal:run-sql" : "vendor/bin/doctrine-dbal dbal:run-sql"
     }
 }

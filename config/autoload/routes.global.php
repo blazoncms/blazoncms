@@ -8,10 +8,4 @@ return [
         'factories' => [
         ],
     ],
-
-    'routes' => [
-        'vcms' => array(
-            'path' => '/'
-        ),
-    ],
 ];

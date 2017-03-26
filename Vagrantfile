@@ -22,6 +22,7 @@ Vagrant.configure(2) do |config|
     config.vm.provision :shell, path: "vagrant/bootstrap.sh"
 
     config.vm.network "private_network", ip: "192.168.33.55"
+    config.vm.synced_folder '.', '/vagrant', nfs: true
 
     # Disable automatic box update checking. If you disable this, then
     # boxes will only be checked for updates when the user runs
