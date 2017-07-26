@@ -1,81 +1,68 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
-Vagrant.configure(2) do |config|
-    # The most common configuration options are documented and commented below.
-    # For a complete reference, please see the online documentation at
-    # https://docs.vagrantup.com.
+VAGRANTFILE_API_VERSION = '2'
 
-    # Every Vagrant development environment requires a box. You can search for
-    # boxes at https://atlas.hashicorp.com/search.
-    config.vm.box = "geerlingguy/ubuntu1604"
+@script = <<SCRIPT
+# Fix for https://bugs.launchpad.net/ubuntu/+source/livecd-rootfs/+bug/1561250
+if ! grep -q "ubuntu-xenial" /etc/hosts; then
+    echo "127.1.0.1 ubuntu-xenial" >> /etc/hosts
+fi
 
-    config.vm.provider :virtualbox do |vb|
-        vb.memory = "1024"
-    end
+# Install dependencies
+add-apt-repository ppa:ondrej/php
+apt-get update
+apt-get install -y apache2 git curl php7.1 php7.1-bcmath php7.1-bz2 php7.1-cli php7.1-curl php7.1-intl php7.1-json php7.1-mbstring php7.1-opcache php7.1-soap php7.1-sqlite3 php7.1-xml php7.1-xsl php7.1-zip libapache2-mod-php7.1 php-xdebug
 
-    config.vm.provision :shell, path: "vagrant/increase_swap.sh"
-    config.vm.provision :shell, path: "vagrant/bootstrap.sh"
+# Prep Environment
+chmod -R 777 /var/www/data
+sed -i 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=ubuntu/g' /etc/apache2/envvars
+sed -i 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=ubuntu/g' /etc/apache2/envvars
+sed -i 's/display_errors = Off/display_errors = On/g' /etc/php/7.1/apache2/php.ini
 
-    config.vm.network "private_network", ip: "192.168.33.55"
-    config.vm.synced_folder '.', '/vagrant', nfs: true
+# Configure Apache
+echo "<VirtualHost *:80>
+	DocumentRoot /var/www/public
+	AllowEncodedSlashes On
 
-    # Disable automatic box update checking. If you disable this, then
-    # boxes will only be checked for updates when the user runs
-    # `vagrant box outdated`. This is not recommended.
-    # config.vm.box_check_update = false
+	<Directory /var/www/public>
+		Options +Indexes +FollowSymLinks
+		DirectoryIndex index.php index.html
+		Order allow,deny
+		Allow from all
+		AllowOverride All
+	</Directory>
 
-    # Create a forwarded port mapping which allows access to a specific port
-    # within the machine from a port on the host machine. In the example below,
-    # accessing "localhost:8080" will access port 80 on the guest machine.
-    # config.vm.network "forwarded_port", guest: 80, host: 8080
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>" > /etc/apache2/sites-available/000-default.conf
+a2enmod rewrite
+service apache2 restart
 
-    # Create a private network, which allows host-only access to the machine
-    # using a specific IP.
-    # config.vm.network "private_network", ip: "192.168.33.10"
+if [ -e /usr/local/bin/composer ]; then
+    /usr/local/bin/composer self-update
+else
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+fi
 
-    # Create a public network, which generally matched to bridged network.
-    # Bridged networks make the machine appear as another physical device on
-    # your network.
-    # config.vm.network "public_network"
+# Reset home directory of vagrant user
+if ! grep -q "cd /var/www" /home/ubuntu/.profile; then
+    echo "cd /var/www" >> /home/ubuntu/.profile
+fi
 
-    # Share an additional folder to the guest VM. The first argument is
-    # the path on the host to the actual folder. The second argument is
-    # the path on the guest to mount the folder. And the optional third
-    # argument is a set of non-required options.
-    # config.vm.synced_folder "../data", "/vagrant_data"
+echo "** [ZF] Run the following command to install dependencies, if you have not already:"
+echo "    vagrant ssh -c 'composer install'"
+echo "** [ZF] Visit http://localhost:8080 in your browser for to view the application **"
+SCRIPT
 
-    # Provider-specific configuration so you can fine-tune various
-    # backing providers for Vagrant. These expose provider-specific options.
-    # Example for VirtualBox:
-    #
-    # config.vm.provider "virtualbox" do |vb|
-    #   # Display the VirtualBox GUI when booting the machine
-    #   vb.gui = true
-    #
-    #   # Customize the amount of memory on the VM:
-    #   vb.memory = "1024"
-    # end
-    #
-    # View the documentation for the provider you are using for more
-    # information on available options.
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = 'ubuntu/xenial64'
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.synced_folder '.', '/var/www'
+  config.vm.provision 'shell', inline: @script
 
-    # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-    # such as FTP and Heroku are also available. See the documentation at
-    # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-    # config.push.define "atlas" do |push|
-    #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-    # end
-
-    # Enable provisioning with a shell script. Additional provisioners such as
-    # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-    # documentation for more information about their specific syntax and use.
-    # config.vm.provision "shell", inline: <<-SHELL
-    #   sudo apt-get update
-    #   sudo apt-get install -y apache2
-    # SHELL
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ["modifyvm", :id, "--name", "Blazon CMS - Ubuntu 16.04"]
+  end
 end
