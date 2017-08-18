@@ -26,4 +26,13 @@ use Zend\ConfigAggregator\ConfigAggregator;
 return [
     'debug' => true,
     ConfigAggregator::ENABLE_CACHE => false,
+
+    // Blazon Custom Settings
+    'asset_manager' => [
+        'caching' => [
+            'default' => [
+                'cache' => null,
+            ]
+        ]
+    ]
 ];

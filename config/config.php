@@ -7,19 +7,24 @@ use Zend\ConfigAggregator\PhpFileProvider;
 // To enable or disable caching, set the `ConfigAggregator::ENABLE_CACHE` boolean in
 // `config/autoload/local.php`.
 $cacheConfig = [
-    'config_cache_path' => 'data/config-cache.php',
+    'config_cache_path' => 'data/cache/config-cache.php',
 ];
 
 $aggregator = new ConfigAggregator([
+    \AssetManager\Expressive\Module::class,
     \BlazonCms\OAuth2\Module::class,
     \BlazonCms\Installer\Module::class,
     \BlazonCms\Core\Module::class,
     \Zend\Cache\ConfigProvider::class,
+
     // Include cache configuration
     new ArrayProvider($cacheConfig),
 
     // Default App module config
     App\ConfigProvider::class,
+
+    // Load the installer config if it exists
+    new PhpFileProvider('data/config/installed.config.php'),
 
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):

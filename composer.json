@@ -22,6 +22,14 @@
         {
             "type": "vcs",
             "url": "git@github.com:blazoncms/oauth2.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:wshafer/assetmanager-core.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:wshafer/assetmanager-expressive.git"
         }
     ],
     "minimum-stability": "alpha",
@@ -31,7 +39,13 @@
         "blazoncms/installer": "dev-master",
         "blazoncms/oauth2": "dev-master",
         "roave/security-advisories": "dev-master",
-        "zendframework/zend-stdlib": "^3.1"
+        "zendframework/zend-stdlib": "^3.1",
+        "wshafer/assetmanager-expressive": "dev-master",
+        "oyejorge/less.php": "^1.7.0.10",
+        "leafo/scssphp": "^0.6.7",
+        "natxet/CssMin": "^3.0",
+        "patchwork/jsqueeze": "^2.0",
+        "npm-asset/bootstrap": "^3.3.7"
     },
     "require-dev": {
         "phpmd/phpmd" : "@stable",
@@ -51,9 +65,12 @@
             "AppTest\\": "test/AppTest/"
         }
     },
-    "extra": {
-        "asset-installer-paths": {
-            "bower-asset-library": "public/bower-asset"
+    "config": {
+        "fxp-asset": {
+            "installer-paths": {
+                "bower-asset-library": "public/bower-asset",
+                "npm-asset-library": "public/npm-asset"
+            }
         }
     },
     "scripts": {
@@ -75,6 +92,7 @@
         "orm:validate-schema" : "vendor/bin/doctrine orm:validate-schema",
         "dbal:import" : "vendor/bin/doctrine-dbal dbal:import",
         "dbal:reserved-words" : "vendor/bin/doctrine-dbal dbal:reserved-words",
-        "dbal:run-sql" : "vendor/bin/doctrine-dbal dbal:run-sql"
+        "dbal:run-sql" : "vendor/bin/doctrine-dbal dbal:run-sql",
+        "development" : "vendor/bin/zf-development-mode"
     }
 }
